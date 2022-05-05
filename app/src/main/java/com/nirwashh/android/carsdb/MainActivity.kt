@@ -24,12 +24,22 @@ class MainActivity : AppCompatActivity() {
 //        dbManager.addCar(Car("Geely", "7 000$"))
 //        dbManager.addCar(Car("Lexus", "100 000$"))
 
+
         val cars = dbManager.getAllCars()
         for (car in cars) {
-            Log.d("Carrr", "ID: ${cars.indexOf(car)+1}, NAME: ${car.name}, PRICE: ${car.price}")
+            Log.d("MyCar", "contains - ID: ${car.id}, NAME: ${car.name}, PRICE: ${car.price}")
         }
+
         dbManager.getCar("BMW")
-        dbManager.getCar(2)
+        val car2 = dbManager.getCar(4)
+        car2.name = "Tesla"
+        car2.price = "100 000$"
+        dbManager.updateCar(car2)
+        dbManager.deleteCar(car2)
+        val count = dbManager.getCarsCount()
+        Log.d("MyCar", "cars in database $count")
+
+
 
     }
 
