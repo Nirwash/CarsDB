@@ -28,14 +28,11 @@ class MainActivity : AppCompatActivity() {
         for (car in cars) {
             Log.d("Carrr", "ID: ${cars.indexOf(car)+1}, NAME: ${car.name}, PRICE: ${car.price}")
         }
-        val car = dbManager.findCar("BMW")
+        dbManager.getCar("BMW")
+        dbManager.getCar(2)
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        dbManager.openDb()
-    }
 
     override fun onDestroy() {
         super.onDestroy()

@@ -1,5 +1,6 @@
 package Data
 
+import Data.DataBaseContract.DataBaseEntry.KEY_ID
 import Data.DataBaseContract.DataBaseEntry.KEY_NAME
 import Data.DataBaseContract.DataBaseEntry.KEY_PRICE
 import Data.DataBaseContract.DataBaseEntry.TABLE_NAME
@@ -7,20 +8,11 @@ import Model.Car
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
-import android.provider.BaseColumns
 import android.util.Log
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import java.lang.Long.getLong
 
 class DataBaseManager(private val context: Context) {
-    val dbHelper = DataBaseHelper(context)
-    var db: SQLiteDatabase? = null
+    private val dbHelper = DataBaseHelper(context)
 
-    fun openDb() {
-        db = dbHelper.writableDatabase
-    }
 
     fun addCar(car: Car) {
         val db = dbHelper.writableDatabase
@@ -29,9 +21,10 @@ class DataBaseManager(private val context: Context) {
             put(KEY_PRICE, car.price)
         }
         db?.insert(TABLE_NAME, null, values)
+        db.close()
     }
 
-    fun findCar(searchText: String): Car {
+    fun getCar(searchText: String): Car {
         val db = dbHelper.readableDatabase
         lateinit var car: Car
         val selection =  "$KEY_NAME like ?"
@@ -42,6 +35,22 @@ class DataBaseManager(private val context: Context) {
         val price = cursor.getString(cursor.getColumnIndexOrThrow(KEY_PRICE))
         car = Car(name, price)
         Log.d("arrr", "NAME: ${car.name}, PRICE: ${car.price}")
+        cursor.close()
+        return car
+    }
+
+    fun getCar(id: Int): Car {
+        val db = dbHelper.readableDatabase
+        val columns = arrayOf(KEY_ID, KEY_NAME, KEY_PRICE)
+        val selection = "$KEY_ID=?"
+        val selectionArgs = arrayOf(id.toString())
+        val cursor = db.query(TABLE_NAME, columns, selection, selectionArgs, null, null, null, null)
+        cursor?.moveToFirst()
+        val carId = cursor.getString(cursor.getColumnIndexOrThrow(KEY_ID)).toInt()
+        val name = cursor.getString(cursor.getColumnIndexOrThrow(KEY_NAME))
+        val price = cursor.getString(cursor.getColumnIndexOrThrow(KEY_PRICE))
+        val car = Car(carId, name, price)
+        Log.d("arrr", "ID: ${car.iD} NAME: ${car.name}, PRICE: ${car.price}")
         cursor.close()
         return car
     }
