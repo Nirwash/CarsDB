@@ -1,13 +1,13 @@
-package Data
+package data
 
 
-import Data.DataBaseContract.DataBaseEntry.SQL_CREATE_ENTRIES
-import Data.DataBaseContract.DataBaseEntry.SQL_DELETE_ENTRIES
+import data.DatabaseContract.DatabaseEntry.SQL_CREATE_ENTRIES
+import data.DatabaseContract.DatabaseEntry.SQL_DELETE_ENTRIES
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class DataBaseHelper(context: Context) : SQLiteOpenHelper(
+class DatabaseHandler(context: Context) : SQLiteOpenHelper(
     context,
     DATABASE_NAME,
     null,

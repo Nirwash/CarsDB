@@ -1,7 +1,6 @@
 package com.nirwashh.android.carsdb
 
-import Data.DataBaseManager
-import Model.Car
+import data.DatabaseManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +8,7 @@ import com.nirwashh.android.carsdb.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var b: ActivityMainBinding
-    private val dbManager = DataBaseManager(this)
+    private val dbManager = DatabaseManager(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b = ActivityMainBinding.inflate(layoutInflater)

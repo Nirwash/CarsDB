@@ -1,4 +1,4 @@
-package Model
+package model
 
 class Car {
     var id = 0

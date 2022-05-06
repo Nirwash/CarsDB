@@ -1,9 +1,9 @@
-package Data
+package data
 
 import android.provider.BaseColumns
 
-object DataBaseContract {
-    object DataBaseEntry: BaseColumns {
+object DatabaseContract {
+    object DatabaseEntry: BaseColumns {
         const val TABLE_NAME = "cars"
         const val KEY_ID = "id"
         const val KEY_NAME = "name"

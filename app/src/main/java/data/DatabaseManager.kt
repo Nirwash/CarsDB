@@ -1,17 +1,17 @@
-package Data
+package data
 
-import Data.DataBaseContract.DataBaseEntry.KEY_ID
-import Data.DataBaseContract.DataBaseEntry.KEY_NAME
-import Data.DataBaseContract.DataBaseEntry.KEY_PRICE
-import Data.DataBaseContract.DataBaseEntry.TABLE_NAME
-import Model.Car
+import data.DatabaseContract.DatabaseEntry.KEY_ID
+import data.DatabaseContract.DatabaseEntry.KEY_NAME
+import data.DatabaseContract.DatabaseEntry.KEY_PRICE
+import data.DatabaseContract.DatabaseEntry.TABLE_NAME
+import model.Car
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.util.Log
 
-class DataBaseManager(private val context: Context) {
-    private val dbHelper = DataBaseHelper(context)
+class DatabaseManager(private val context: Context) {
+    private val dbHelper = DatabaseHandler(context)
 
 
     fun addCar(car: Car) {
