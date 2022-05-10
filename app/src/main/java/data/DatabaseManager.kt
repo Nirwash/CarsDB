@@ -10,7 +10,7 @@ import android.content.Context
 import android.database.Cursor
 import android.util.Log
 
-class DatabaseManager(private val context: Context) {
+class DatabaseManager(context: Context) {
     private val dbHelper = DatabaseHandler(context)
 
 
@@ -35,7 +35,7 @@ class DatabaseManager(private val context: Context) {
             cursor.moveToFirst()
             val name = cursor.getString(cursor.getColumnIndexOrThrow(KEY_NAME))
             val price = cursor.getString(cursor.getColumnIndexOrThrow(KEY_PRICE))
-            car = Car(name, price)
+            car = Car(name = name, price = price)
             Log.d("MyCar", "getFromName - NAME: ${car.name}, PRICE: ${car.price}")
             cursor.close()
             return car
@@ -93,7 +93,7 @@ class DatabaseManager(private val context: Context) {
         val int = db.update(TABLE_NAME, values, "$KEY_ID=?", arrayOf(car.id.toString()))
         Log.d("MyCar", "update - ID: ${car.id}, NAME: ${car.name}, PRICE: ${car.price}")
         val cars = getAllCars()
-        for (car in cars) {
+        for (item in cars) {
             Log.d("MyCar", "after updating - ID: ${car.id}, NAME: ${car.name}, PRICE: ${car.price}")
         }
         return int
@@ -104,7 +104,7 @@ class DatabaseManager(private val context: Context) {
         db.delete(TABLE_NAME, "$KEY_ID=?", arrayOf(car.id.toString()))
         Log.d("MyCar", "delete - ID: ${car.id}, NAME: ${car.name}, PRICE: ${car.price}")
         val cars = getAllCars()
-        for (car in cars) {
+        for (item in cars) {
             Log.d("MyCar", "after deleting - ID: ${car.id}, NAME: ${car.name}, PRICE: ${car.price}")
         }
         db.close()
@@ -114,7 +114,10 @@ class DatabaseManager(private val context: Context) {
         val db = dbHelper.readableDatabase
         val countQuery = "SELECT * FROM $TABLE_NAME"
         val cursor = db.rawQuery(countQuery, null)
-        return cursor.count
+        val count = cursor.count
+        cursor.close()
+        return count
+
     }
 
     fun closeDb() {

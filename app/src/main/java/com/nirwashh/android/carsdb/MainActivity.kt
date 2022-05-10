@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.nirwashh.android.carsdb.databinding.ActivityMainBinding
+import model.Car
 
 class MainActivity : AppCompatActivity() {
     lateinit var b: ActivityMainBinding
@@ -17,11 +18,11 @@ class MainActivity : AppCompatActivity() {
 
 
 
-//        dbManager.addCar(Car("Toyota", "10 000$"))
-//        dbManager.addCar(Car("BMW", "40 000$"))
-//        dbManager.addCar(Car("KIA", "5 000$"))
-//        dbManager.addCar(Car("Geely", "7 000$"))
-//        dbManager.addCar(Car("Lexus", "100 000$"))
+        dbManager.addCar(Car(name = "Toyota", price = "10 000$"))
+        dbManager.addCar(Car(name = "BMW", price = "40 000$"))
+        dbManager.addCar(Car(name = "KIA", price = "5 000$"))
+        dbManager.addCar(Car(name = "Geely", price = "7 000$"))
+        dbManager.addCar(Car(name = "Lexus", price = "100 000$"))
 
 
         val cars = dbManager.getAllCars()
